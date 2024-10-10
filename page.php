@@ -1,11 +1,17 @@
 <?php
+
 get_header();
 
-while (have_posts()) {
-    the_post(); ?>
-    <div class='content'>
-        <div id='page'>
-            <h2><?php the_title(); ?></h2>
+?>
+<div class='content'>
+
+    <?php
+    while (have_posts()) {
+        the_post(); ?>
+        <div class='banner'>
+            <h1><?php the_title(); ?></h1>
+        </div>
+        <section>
             <?php
             //echo get_the_ID(); -> gives us the page ID
             //0 evaluates to FALSE
@@ -17,15 +23,14 @@ while (have_posts()) {
             <?php }
 
             ?>
-            <p>CUSTOM MESSAGE</p>
             <p><?php the_content(); ?></p>
-        </div>
+        </section>
 
-        <?php
-        //get_pages
-        $theChildren = get_pages(array('child_of' => get_the_ID()));
-        if ($parentId or $theChildren) {
-        ?>
+        <!-- <?php
+                //get_pages
+                $theChildren = get_pages(array('child_of' => get_the_ID()));
+                if ($parentId or $theChildren) {
+                ?>
             <div>
                 <p><?php echo get_the_title($parentId); ?></p>
                 <ul>
@@ -40,12 +45,14 @@ while (have_posts()) {
                     ?>
                 </ul>
             </div>
-    </div>
-<?php
-        }
-?>
 
+        <?php
+                }
+        ?> -->
+
+    <?php
+    } ?>
+</div>
 <?php
-}
 get_footer();
 ?>
