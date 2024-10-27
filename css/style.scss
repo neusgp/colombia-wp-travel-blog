@@ -2,6 +2,8 @@
  /*Here I need to import normalize and also all the scss modules that I have created so that they work*/
  @import "normalize.css";
 
+ @import "modules/search-field.scss";
+
 h1,
 h2,
 h3,
