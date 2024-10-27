@@ -1,5 +1,5 @@
 export const getResults = async (query) => {
-  const url = `http://learningwp.local/wp-json/wp/v2/food?search=${query}`;
+  const url = `http://learningwp.local/wp-json/wp/v2/posts?search=${query}`;
   try {
     const response = await fetch(url);
 

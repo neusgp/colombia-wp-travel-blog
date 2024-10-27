@@ -41,7 +41,7 @@ if (inputField) {
       console.log(result.length);
 
       if (result.length === 0) {
-        resultsSection.innerHTML += `<p>Apologies, there are no posts related to your search</p>`;
+        resultsSection.innerHTML = `<p>Apologies, there are no posts related to your search</p>`;
         return;
       }
 
