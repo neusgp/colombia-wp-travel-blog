@@ -4,7 +4,14 @@
     <div class='banner'>
         <h1>Food</h1>
     </div>
+    <section>
+        <div>
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input type=" text" class='search-field' placeholder='type to search' />
 
+        </div>
+        <div class="search-section"></div>
+    </section>
     <section>
         <div id='preview-list'>
             <?php

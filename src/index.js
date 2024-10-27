@@ -1,3 +1,4 @@
 import "../css/style.scss";
+import "./Search.js";
 
-alert("just a test");
+console.log("loading js 🚀");
