@@ -1,0 +1,285 @@
+/* 
+Theme Name: Arepas Con Queso Theme
+Author: Neus Garcia
+Version: 1.0
+ */
+
+ /*Here I need to import normalize and also all the scss modules that I have created so that they work*/
+ @import "normalize.css";
+
+h1,
+h2,
+h3,
+h4,
+p,
+ol,
+ul,
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+
+}
+
+p,
+h1 {
+    font-family: 'Spectral', 'serif';
+}
+
+h2,
+h3,
+h4 {
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 44px;
+    font-weight: 500;
+    color: white;
+}
+
+h3 {
+
+    font-weight: 400;
+    color: white;
+    text-align: center;
+}
+
+
+a {
+    color: rgba(30, 30, 30);
+    text-decoration: none;
+}
+
+html,
+body {
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Courier Prime', 'serif';
+    box-sizing: border-box;
+    margin: 0;
+    color: rgba(30, 30, 30);
+}
+
+header {
+    padding: 18px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+}
+
+.content {
+    display: flex;
+    flex-direction: inherit;
+    flex-grow: 1;
+
+}
+
+/* menu items */
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+
+#hero {
+    padding: 8% 0;
+    display: flex;
+    flex-direction: inherit;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.main_title {
+    width: 480px;
+}
+
+.scroll_arrow {
+    width: 100px;
+}
+
+.current_page_item a,
+.current_page_ancestor a {
+    color: #4270FA
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2% 10%;
+    gap: 30px;
+}
+
+.latest-posts {
+    width: 260px;
+}
+
+.food {
+    width: 200px;
+}
+
+
+#preview-list {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+#food-preview-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+
+#post-preview,
+#food-post-preview {
+    display: flex;
+    box-shadow: 0px 5px 10px 2px rgba(6, 53, 20, 0.1);
+    background-color: white;
+}
+
+
+#food-post-preview {
+    flex-direction: column-reverse;
+    width: min-content;
+}
+
+#post-data {
+    padding: 22px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#post-data p {
+    font-family: 'Spectral', 'serif';
+}
+
+.attachment-post-thumbnail {
+    width: 300px;
+    height: auto;
+}
+
+.post-details {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.continue-reading {
+    color: #4270FA;
+    text-decoration: underline;
+}
+
+.banner {
+    height: 400px;
+    background-color: rgb(90, 159, 93);
+    display: flex;
+    flex-direction: inherit;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+    height: 5%;
+    background-color: #140d50
+}
+
+.button {
+    margin: 30px;
+    border-radius: 8px;
+    color: #1C28BC;
+    border: 2px solid #1C28BC;
+    padding: 4px 12px;
+    transition: color 0.5s, border 0.5s;
+}
+
+.button p {
+    font-family: 'Courier Prime', 'serif';
+}
+
+.button:hover {
+    border: 2px solid #FF6BC4;
+    color: #FF6BC4;
+}
+
+.divider {
+    width: 100%;
+    border: 0.5px solid #1C28BC;
+}
+
+
+/* Responsivess */
+
+/*tablet*/
+@media only screen and (max-width: 1220px) {
+    .attachment-post-thumbnail {
+        width: 400px;
+        height: auto;
+    }
+
+    #post-preview {
+        flex-direction: column-reverse;
+        height: auto;
+        width: min-content;
+    }
+
+    #food-preview-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #post-data {
+        width: auto;
+        height: auto;
+    }
+}
+
+/* mobile*/
+@media only screen and (max-width: 600px) {
+    #hero {
+        padding: 15% 0;
+    }
+
+    .main_title {
+        width: 88%;
+    }
+
+    .attachment-post-thumbnail {
+        width: 300px;
+        height: auto;
+    }
+
+    .scroll_arrow {
+        width: 20%;
+    }
+
+    section {
+        padding: 5%;
+    }
+
+    .button {
+        width: 100px;
+        text-align: center;
+    }
+}

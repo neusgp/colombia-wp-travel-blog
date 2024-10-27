@@ -13,8 +13,8 @@ function learning_wp_files()
     wp_enqueue_style('spectral');
     wp_enqueue_style('courier prime');
 
-    wp_enqueue_style('learning_wp_main_styles', get_stylesheet_uri());
-    wp_enqueue_style('learning_wp_main_styles', get_stylesheet_uri());
+    wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
+    wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css'));
 }
 
 //second param is our function. We are no executing the function right away, wp handles that for us. 
@@ -25,6 +25,7 @@ function learning_wp_features()
 {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
+    // add_theme_support('excerpt');
     register_nav_menu('headerMenuLocation', 'Header Menu Location');
 }
 

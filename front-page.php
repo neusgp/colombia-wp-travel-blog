@@ -18,7 +18,10 @@
                     <div id='post-preview'>
                         <div id='post-data'>
                             <h4><?php the_title(); ?></h4>
-                            <?php the_excerpt(); ?>
+                            <p><?php echo wp_trim_words(get_the_content(), 48); ?></p>
+                            <a class='continue-reading' href="<?php the_permalink() ?>">
+                                <p>Continue reading</p>
+                            </a>
                             <div class='post-details'>
                                 <p>Posted by: <span class='details-highlight'><?php the_author(); ?></span> on <span class='details-highlight'><?php the_time("g/m/y"); ?></span> in <?php echo get_the_category_list(', '); ?></p>
                             </div>
@@ -40,7 +43,7 @@
         <div class='divider'></div>
     </section>
     <section>
-        <img class=' food' alt="food" src="<?php echo get_template_directory_uri(); ?>/images/food.png">
+        <img class='food' alt="food" src="<?php echo get_template_directory_uri(); ?>/images/food.png">
         <div id='food-preview-list'>
             <?php
             $homePageFoodPosts = new WP_Query(array('posts_per_page' => 3, 'post_type' => 'food'));
@@ -54,7 +57,10 @@
                     <div id='food-post-preview'>
                         <div id='post-data'>
                             <h4><?php the_title(); ?></h4>
-                            <?php the_excerpt(); ?>
+                            <p><?php echo wp_trim_words(get_the_content(), 18); ?></p>
+                            <a class='continue-reading' href="<?php the_permalink() ?>">
+                                <p>Continue reading</p>
+                            </a>
                             <div class='post-details'>
                                 <p>Posted by: <span class='details-highlight'><?php the_author(); ?></span> on <span class='details-highlight'><?php the_time("g/m/y"); ?></span> in <?php echo get_the_category_list(', '); ?></p>
                             </div>
@@ -68,7 +74,7 @@
             ?>
 
         </div>
-        <a href="<?php echo site_url('/blog'); ?>">
+        <a href="<? echo get_post_type_archive_link('food'); ?>">
             <div class='button'>
                 <p>Check out all food posts</p>
             </div>
