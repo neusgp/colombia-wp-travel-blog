@@ -1,4 +1,8 @@
-export const handleShowSearchSection = (inputField, resultsSection) => {
+export const handleShowSearchSection = (
+  inputField,
+  resultsSection,
+  allPostsSection
+) => {
   if (inputField) {
     inputField.addEventListener("input", (e) => {
       const value = e.target.value;
@@ -7,14 +11,17 @@ export const handleShowSearchSection = (inputField, resultsSection) => {
       );
 
       if (!value && isSearchActive) {
-        console.log("removing class");
         resultsSection.classList.remove("show-search-section");
-        allPosts.classList.add(".hide-all-posts");
+        resultsSection.classList.add("search-section");
+
+        allPostsSection.classList.remove("hide-posts-section");
       }
       if (value && !isSearchActive) {
         console.log("adding class");
         resultsSection.classList.add("show-search-section");
-        allPosts.classList.add(".hide-all-posts");
+        resultsSection.classList.remove("search-section");
+
+        allPostsSection.classList.add("hide-posts-section");
       }
     });
   }

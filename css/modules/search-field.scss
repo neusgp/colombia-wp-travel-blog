@@ -1,13 +1,29 @@
+.search {
+  align-self: end;
+}
+
 .search-field {
-   padding: 2px;
-   align-self: end;
+  padding: 2px;
+  align-self: end;
 }
 
 .search-section {
-   display: none;
+  display: none;
 }
 
 .show-search-section {
-   display: block !important;
-   color: red;
+  display: flex;
+}
+
+.hide-posts-section {
+  display: none;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid black;
+}
+input:focus {
+  outline: none;
+  border: specify yours;
 }

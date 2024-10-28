@@ -5,12 +5,12 @@
         <h1>Blog</h1>
     </div>
     <section>
-        <div>
+        <div class='search'>
             <i class="fa fa-search" aria-hidden="true"></i>
-            <input type=" text" class='search-field' placeholder='type to search' />
+            <input type=" text" class='search-field search-posts' placeholder='Type to search' />
 
         </div>
-        <div class="search-section"></div>
+        <div id='preview-list' class="search-section"></div>
     </section>
     <section class='all-posts'>
         <div id='preview-list'>

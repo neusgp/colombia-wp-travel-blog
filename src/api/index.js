@@ -1,1 +1,1 @@
-export * from "./getResults";
+export * from "./fetchPosts";
