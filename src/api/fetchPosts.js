@@ -1,4 +1,4 @@
-export const getResults = async (query) => {
+export const fetchPosts = async (query, postType) => {
   const url = `http://learningwp.local/wp-json/wp/v2/posts?search=${query}`;
   try {
     const response = await fetch(url);
