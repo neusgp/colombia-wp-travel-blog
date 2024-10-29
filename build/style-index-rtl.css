@@ -2,6 +2,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./css/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************/
 /*Here I need to import normalize and also all the scss modules that I have created so that they work*/
+.search {
+  align-self: end;
+}
+
 .search-field {
   padding: 2px;
   align-self: end;
@@ -12,8 +16,42 @@
 }
 
 .show-search-section {
-  display: block !important;
-  color: red;
+  display: flex;
+}
+
+.hide-posts-section {
+  display: none;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+input:focus {
+  outline: none;
+  border: specify yours;
+}
+
+#single-post {
+  display: flex;
+  flex-direction: inherit;
+  gap: 40px;
+}
+
+.post-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wp-block-image,
+.wp-block-gallery {
+  margin: 20px 0;
+}
+
+.food-section {
+  background-color: rgb(255, 249, 242);
 }
 
 h1,
@@ -37,7 +75,10 @@ h1 {
   font-family: "Spectral", "serif";
 }
 
-h2,
+h2 {
+  font-size: 30px;
+}
+
 h3,
 h4 {
   font-size: 20px;
@@ -102,6 +143,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  background-color: rgb(255, 249, 242);
 }
 
 .main_title {
@@ -114,7 +156,7 @@ header {
 
 .current_page_item a,
 .current_page_ancestor a {
-  color: #4270FA;
+  color: #4270fa;
 }
 
 section {
@@ -182,14 +224,18 @@ section {
   font-weight: 400;
 }
 
+.details-highlight {
+  color: #4270fa;
+}
+
 .continue-reading {
-  color: #4270FA;
+  color: #4270fa;
   text-decoration: underline;
 }
 
 .banner {
-  height: 400px;
-  background-color: rgb(90, 159, 93);
+  height: 300px;
+  background-color: rgb(84, 131, 186);
   display: flex;
   flex-direction: inherit;
   align-items: center;
@@ -209,8 +255,8 @@ footer {
 .button {
   margin: 30px;
   border-radius: 8px;
-  color: #1C28BC;
-  border: 2px solid #1C28BC;
+  color: #1c28bc;
+  border: 2px solid #1c28bc;
   padding: 4px 12px;
   transition: color 0.5s, border 0.5s;
 }
@@ -220,13 +266,13 @@ footer {
 }
 
 .button:hover {
-  border: 2px solid #FF6BC4;
-  color: #FF6BC4;
+  border: 2px solid #ff6bc4;
+  color: #ff6bc4;
 }
 
 .divider {
   width: 100%;
-  border: 0.5px solid #1C28BC;
+  border: 0.5px solid #1c28bc;
 }
 
 /* Responsivess */
@@ -242,6 +288,9 @@ footer {
     width: -moz-min-content;
     width: min-content;
   }
+  .search-post-preview {
+    width: auto !important;
+  }
   #food-preview-list {
     display: flex;
     flex-direction: column;
@@ -250,6 +299,9 @@ footer {
   #post-data {
     width: auto;
     height: auto;
+  }
+  .search {
+    align-self: auto;
   }
 }
 /* mobile*/
@@ -261,7 +313,7 @@ footer {
     width: 88%;
   }
   .attachment-post-thumbnail {
-    width: 300px;
+    width: 340px;
     height: auto;
   }
   .scroll_arrow {

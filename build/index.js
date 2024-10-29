@@ -9,68 +9,33 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api */ "./src/api/index.js");
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib */ "./src/lib/index.js");
 
-const inputField = document.querySelector(".search-field");
+const searchPostsField = document.querySelector(".search-posts");
+const searchFoodField = document.querySelector(".search-food");
 const resultsSection = document.querySelector(".search-section");
-const allPosts = document.querySelector(".all-posts");
+const allPostsSection = document.querySelector(".all-posts");
+const inputField = searchPostsField || searchFoodField;
+const location = searchPostsField ? "posts" : "food";
 if (inputField) {
-  inputField.addEventListener("input", e => {
-    const value = e.target.value;
-    const isSearchActive = resultsSection.classList.contains("show-search-section");
-    if (!value && isSearchActive) {
-      console.log("removing class");
-      resultsSection.classList.remove("show-search-section");
-      allPosts.classList.add(".hide-all-posts");
-    }
-    if (value && !isSearchActive) {
-      console.log("adding class");
-      resultsSection.classList.add("show-search-section");
-      allPosts.classList.add(".hide-all-posts");
-    }
-  });
-  let timerId;
-  inputField.addEventListener("input", e => {
-    const value = e.target.value;
-    if (!value) {
-      clearTimeout(timerId);
-      return resultsSection.innerHTML = "";
-    }
-    if (timerId) clearTimeout(timerId);
-    timerId = setTimeout(async () => {
-      const result = await (0,_api__WEBPACK_IMPORTED_MODULE_0__.getResults)(value);
-      console.log(result.length);
-      if (result.length === 0) {
-        resultsSection.innerHTML = `<p>Apologies, there are no posts related to your search</p>`;
-        return;
-      }
-      if (result) {
-        resultsSection.innerHTML = "";
-        console.log(result);
-        result.forEach(({
-          title
-        }) => {
-          return resultsSection.innerHTML += `<h2>${title.rendered}</h2>`;
-        });
-      }
-    }, 600);
-  });
+  (0,_lib__WEBPACK_IMPORTED_MODULE_0__.handleShowSearchSection)(inputField, resultsSection, allPostsSection);
+  (0,_lib__WEBPACK_IMPORTED_MODULE_0__.handleSearchResults)(inputField, resultsSection, location);
 }
 
 /***/ }),
 
-/***/ "./src/api/getResults.js":
+/***/ "./src/api/fetchPosts.js":
 /*!*******************************!*\
-  !*** ./src/api/getResults.js ***!
+  !*** ./src/api/fetchPosts.js ***!
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getResults: () => (/* binding */ getResults)
+/* harmony export */   fetchPosts: () => (/* binding */ fetchPosts)
 /* harmony export */ });
-const getResults = async query => {
-  const url = `http://learningwp.local/wp-json/wp/v2/posts?search=${query}`;
+const fetchPosts = async (query, location) => {
+  const url = `http://learningwp.local/wp-json/wp/v2/${location}?search=${query}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -93,9 +58,9 @@ const getResults = async query => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getResults: () => (/* reexport safe */ _getResults__WEBPACK_IMPORTED_MODULE_0__.getResults)
+/* harmony export */   fetchPosts: () => (/* reexport safe */ _fetchPosts__WEBPACK_IMPORTED_MODULE_0__.fetchPosts)
 /* harmony export */ });
-/* harmony import */ var _getResults__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getResults */ "./src/api/getResults.js");
+/* harmony import */ var _fetchPosts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fetchPosts */ "./src/api/fetchPosts.js");
 
 
 /***/ }),
@@ -112,6 +77,111 @@ __webpack_require__.r(__webpack_exports__);
 
 
 console.log("loading js 🚀");
+
+/***/ }),
+
+/***/ "./src/lib/handleSearchResults.js":
+/*!****************************************!*\
+  !*** ./src/lib/handleSearchResults.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   handleSearchResults: () => (/* binding */ handleSearchResults)
+/* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./src/api/index.js");
+
+const getPostPreviewHTML = (title, excerpt, link, the_author) => `
+ <li>        
+                  <div id='post-preview' class='search-post-preview'>
+                        <div id='post-data'>
+                            <h4>${title}</h4>
+                            ${excerpt}<a href="${link}">Continue reading</a>
+                            <div class='post-details'>
+                                <p>Posted by: <span class='details-highlight'>${the_author}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    </li>`;
+const handleSearchResults = (inputField, resultsSection, location) => {
+  let timerId;
+  inputField.addEventListener("input", e => {
+    const value = e.target.value;
+    if (!value) {
+      clearTimeout(timerId);
+      return resultsSection.innerHTML = "";
+    }
+    if (timerId) clearTimeout(timerId);
+    timerId = setTimeout(async () => {
+      const result = await (0,_api__WEBPACK_IMPORTED_MODULE_0__.fetchPosts)(value, location);
+      if (result.length === 0) {
+        resultsSection.innerHTML = `<p>Apologies, there are no posts related to your search</p>`;
+        return;
+      }
+      if (result) {
+        resultsSection.innerHTML = "";
+        console.log(result);
+        result.forEach(({
+          title,
+          excerpt,
+          link,
+          the_author
+        }) => {
+          return resultsSection.innerHTML += getPostPreviewHTML(title.rendered, excerpt.rendered, link, the_author);
+        });
+      }
+    }, 600);
+  });
+};
+
+/***/ }),
+
+/***/ "./src/lib/handleShowSearchSection.js":
+/*!********************************************!*\
+  !*** ./src/lib/handleShowSearchSection.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   handleShowSearchSection: () => (/* binding */ handleShowSearchSection)
+/* harmony export */ });
+const handleShowSearchSection = (inputField, resultsSection, allPostsSection) => {
+  inputField.addEventListener("input", e => {
+    const value = e.target.value;
+    const isSearchActive = resultsSection.classList.contains("show-search-section");
+    if (!value && isSearchActive) {
+      resultsSection.classList.remove("show-search-section");
+      resultsSection.classList.add("search-section");
+      allPostsSection.classList.remove("hide-posts-section");
+    }
+    if (value && !isSearchActive) {
+      console.log("adding class");
+      resultsSection.classList.add("show-search-section");
+      resultsSection.classList.remove("search-section");
+      allPostsSection.classList.add("hide-posts-section");
+    }
+  });
+};
+
+/***/ }),
+
+/***/ "./src/lib/index.js":
+/*!**************************!*\
+  !*** ./src/lib/index.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   handleSearchResults: () => (/* reexport safe */ _handleSearchResults__WEBPACK_IMPORTED_MODULE_0__.handleSearchResults),
+/* harmony export */   handleShowSearchSection: () => (/* reexport safe */ _handleShowSearchSection__WEBPACK_IMPORTED_MODULE_1__.handleShowSearchSection)
+/* harmony export */ });
+/* harmony import */ var _handleSearchResults__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handleSearchResults */ "./src/lib/handleSearchResults.js");
+/* harmony import */ var _handleShowSearchSection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handleShowSearchSection */ "./src/lib/handleShowSearchSection.js");
+
+
 
 /***/ }),
 
