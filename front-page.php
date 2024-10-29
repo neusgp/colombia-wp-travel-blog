@@ -12,6 +12,10 @@
             //since we can't query posts here cause it's the front-page. 
             $homePagePosts = new WP_Query(array('posts_per_page' => 3));
             //more stuff can go inside each posts's section (time, author, link, etc...)
+            if (!$homePagePosts->have_posts()) {
+            ?> <p>There are no posts in this category yet!</p>
+            <?php
+            }
             while ($homePagePosts->have_posts()) {
                 $homePagePosts->the_post(); ?>
                 <li>
@@ -40,17 +44,18 @@
                 <p>See all posts!</p>
             </div>
         </a>
-        <div class='divider'></div>
+
     </section>
-    <section>
-        <img class='food' alt="food" src="<?php echo get_template_directory_uri(); ?>/images/food.png">
+    <section class='food-section'>
+        <img class=' food' alt="food" src="<?php echo get_template_directory_uri(); ?>/images/food.png">
+        <?php
+        $homePageFoodPosts = new WP_Query(array('posts_per_page' => 3, 'post_type' => 'food'));
+        if (!$homePageFoodPosts->have_posts()) {
+        ?> <p>There are no posts in this category yet!</p>
+        <?php
+        } ?>
         <div id='food-preview-list'>
             <?php
-            $homePageFoodPosts = new WP_Query(array('posts_per_page' => 3, 'post_type' => 'food'));
-            if (!$homePageFoodPosts->have_posts()) {
-            ?> <p>There are no posts in this category yet!</p>
-            <?php
-            }
             while ($homePageFoodPosts->have_posts()) {
                 $homePageFoodPosts->the_post(); ?>
                 <li>
@@ -62,7 +67,7 @@
                                 <p>Continue reading</p>
                             </a>
                             <div class='post-details'>
-                                <p>Posted by: <span class='details-highlight'><?php the_author(); ?></span> on <span class='details-highlight'><?php the_time("g/m/y"); ?></span> in <?php echo get_the_category_list(', '); ?></p>
+                                <p>Posted by: <span class='details-highlight'><?php the_author(); ?></span> on <span class='details-highlight'><?php the_time("g/m/y"); ?></span></p>
                             </div>
                         </div>
                         <?php the_post_thumbnail(); ?>

@@ -1,0 +1,16 @@
+#single-post {
+  display: flex;
+  flex-direction: inherit;
+  gap: 40px;
+}
+
+.post-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wp-block-image,
+.wp-block-gallery {
+  margin: 20px 0;
+}

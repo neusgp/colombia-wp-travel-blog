@@ -5,18 +5,11 @@ const searchFoodField = document.querySelector(".search-food");
 const resultsSection = document.querySelector(".search-section");
 const allPostsSection = document.querySelector(".all-posts");
 
-console.log(searchPostsField);
+const inputField = searchPostsField || searchFoodField;
 
 const location = searchPostsField ? "posts" : "food";
 
-handleShowSearchSection(
-  searchPostsField || searchFoodField,
-  resultsSection,
-  allPostsSection
-);
-
-handleSearchResults(
-  searchPostsField || searchFoodField,
-  resultsSection,
-  location
-);
+if (inputField) {
+  handleShowSearchSection(inputField, resultsSection, allPostsSection);
+  handleSearchResults(inputField, resultsSection, location);
+}

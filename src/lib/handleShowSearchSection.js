@@ -3,26 +3,24 @@ export const handleShowSearchSection = (
   resultsSection,
   allPostsSection
 ) => {
-  if (inputField) {
-    inputField.addEventListener("input", (e) => {
-      const value = e.target.value;
-      const isSearchActive = resultsSection.classList.contains(
-        "show-search-section"
-      );
+  inputField.addEventListener("input", (e) => {
+    const value = e.target.value;
+    const isSearchActive = resultsSection.classList.contains(
+      "show-search-section"
+    );
 
-      if (!value && isSearchActive) {
-        resultsSection.classList.remove("show-search-section");
-        resultsSection.classList.add("search-section");
+    if (!value && isSearchActive) {
+      resultsSection.classList.remove("show-search-section");
+      resultsSection.classList.add("search-section");
 
-        allPostsSection.classList.remove("hide-posts-section");
-      }
-      if (value && !isSearchActive) {
-        console.log("adding class");
-        resultsSection.classList.add("show-search-section");
-        resultsSection.classList.remove("search-section");
+      allPostsSection.classList.remove("hide-posts-section");
+    }
+    if (value && !isSearchActive) {
+      console.log("adding class");
+      resultsSection.classList.add("show-search-section");
+      resultsSection.classList.remove("search-section");
 
-        allPostsSection.classList.add("hide-posts-section");
-      }
-    });
-  }
+      allPostsSection.classList.add("hide-posts-section");
+    }
+  });
 };

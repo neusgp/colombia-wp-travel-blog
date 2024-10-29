@@ -2,6 +2,8 @@
 @import "normalize.css";
 
 @import "modules/search-field.scss";
+@import "modules/single-post.scss";
+@import "modules/food-section.scss";
 
 h1,
 h2,
@@ -24,7 +26,9 @@ h1 {
   font-family: "Spectral", "serif";
 }
 
-h2,
+h2 {
+  font-size: 30px;
+}
 h3,
 h4 {
   font-size: 20px;
@@ -89,6 +93,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  background-color: rgb(255, 249, 242);
 }
 
 .main_title {
@@ -168,13 +173,17 @@ section {
   font-weight: 400;
 }
 
+.details-highlight {
+  color: #4270fa;
+}
+
 .continue-reading {
   color: #4270fa;
   text-decoration: underline;
 }
 
 .banner {
-  height: 400px;
+  height: 300px;
   background-color: rgb(84, 131, 186);
   display: flex;
   flex-direction: inherit;
